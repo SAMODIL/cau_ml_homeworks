@@ -30,12 +30,12 @@ class LossAndDerivatives:
     @staticmethod
     def mse_derivative(X, Y, w):
 
-        return 2*X.T.dot(X.dot(w) - Y)/X.shape[0]
+        return 2* np.dot(X.T, (X.dot(w) - Y)) / Y.size
 
     @staticmethod
     def mae_derivative(X, Y, w):
 
-        return np.array(list(map(lambda diff : 0 if diff == 0 else 1 if diff > 0 else -1, list(X.dot(w)- Y))))
+        return np.dot(X.T, (np.sign(X.dot(w)-Y))) / Y.size
 
     @staticmethod
     def l2_reg_derivative(w):
